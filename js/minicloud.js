@@ -79,4 +79,50 @@ $(document).ready(function(){
     });
 
 
+    $("#btn-new-folder-modal-open").click(function(){
+        $("#newFolderInput").css("border", "1px solid #ced4da"); // reset "error border"
+    });
+
+
+    $("#btn-new-folder").click(function(){
+
+        var folderName = $("#newFolderInput").val();
+
+        var path = getUrlParameter("sub");
+        if (path == undefined) {
+            path = "";
+        }
+
+        if (folderName.includes(".") || folderName.trim().length == 0) {
+            $("#newFolderInput").css("border", "1px solid red");
+        } else {
+            $("#btn-new-folder").prop("disabled", true);
+
+            $("#btn-new-folder").html("<span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\n<span class=\"sr-only\">Loading...</span> Loading...");
+
+            $.ajax({
+                url: 'api.php', // point to server-side controller method
+                data: {
+                    request : "newFolder",
+                    path : path,
+                    folderName : folderName
+                },
+                type: 'post',
+
+                success: function(response) {
+                    $("#btn-new-folder").html("Create");
+                    window.location = window.location;
+                },
+                error: function (response) {
+                    $("#btn-new-folder").html("Error!");
+                }
+            });
+
+
+            $("#btn-new-folder").prop("disabled", false);
+        }
+
+    })
+
+
 })

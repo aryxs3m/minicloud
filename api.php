@@ -7,7 +7,7 @@
  */
 
 
-    $user = "aryx"; //TODO !!
+
 
     include_once "config.inc.php";
 
@@ -16,6 +16,9 @@
             http_response_code(400);
             exit;
         }
+
+        $user = "aryx"; //TODO !!
+
         if (mkdir(home_directory_root . "{$user}/{$_POST['path']}/{$_POST['folderName']}")) {
             echo "ok";
         } else {

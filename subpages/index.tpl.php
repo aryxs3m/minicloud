@@ -57,7 +57,7 @@
 <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar">
     <div class="btn-group mr-2" role="group" aria-label="Group">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fileUploadModal"><i class="fas fa-file-upload"></i> Upload File</button>
-        <button type="button" class="btn btn-secondary"><i class="fas fa-folder"></i> New Folder</button>
+        <button type="button" class="btn btn-secondary" id="btn-new-folder-modal-open" data-toggle="modal" data-target="#newFolderModal"><i class="fas fa-folder"></i> New Folder</button>
     </div>
 </div>
 
@@ -154,6 +154,31 @@ echo "</div>";
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" id="btn-upload-file" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="newFolderModal" tabindex="-1" role="dialog" aria-labelledby="newFolderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newFolderModalLabel">New Folder</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="newFolderInput">Folder name</label>
+                    <input type="text" class="form-control" id="newFolderInput" placeholder="New Folder">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btn-new-folder" class="btn btn-primary">Create</button>
             </div>
         </div>
     </div>
