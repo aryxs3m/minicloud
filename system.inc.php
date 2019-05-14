@@ -42,7 +42,6 @@ function createAdmin($username, $password) {
 
 function frontController(&$page) {
     if (isset($page)) {
-
         if (file_exists("subpages/{$page}.tpl.php")) {
             include_once "subpages/{$page}.tpl.php";
         } else {
