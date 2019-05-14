@@ -9,17 +9,46 @@ main, footer {
 }
 
 nav.navbar {
-    background-color:#222;
+    background-color:#352961;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color:#f6e5e5;
 }
 
 nav ol.breadcrumb {
-    background-color:#ccc;
+    background-color:#352961;
 }
 
 .breadcrumb-item a {
-    color:#222;
+    color:#f6e5e5;
+}
+.breadcrumb-item.active {
+    color:#f6e5e5;
 }
 
 .breadcrumb-item a:hover {
     text-decoration: none;
+}
+
+.btn, nav, ol.breadcrumb, .badge {
+    border-radius:0px;
+}
+
+
+
+.btn-primary {
+    background-color:#352961;
+    border-color:#570d88;
+}
+.btn-primary:hover {
+    background-color:#570d88;
+    border-color:#570d88;
+}
+.btn-primary:not(:disabled):not(.disabled):active {
+    background-color:#7b0dbd;
+    border-color:#570d88;
+}
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(87,13,136, 0.5);
 }
