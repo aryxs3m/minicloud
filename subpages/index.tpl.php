@@ -37,11 +37,18 @@
             $subExplode = explode("/", $subdir);
             $allItems = sizeof($subExplode);
             $currentItem = 1;
+            $path = "";
             foreach ($subExplode as $curDir) {
+
+                if ($path !== "") {
+                    $path .= "/";
+                }
+                $path .= $curDir;
+
                 if ($allItems == $currentItem) {
                     echo "<li class=\"breadcrumb-item active\" aria-current=\"page\">$curDir</li>";
                 } else {
-                    echo "<li class=\"breadcrumb-item\"><a href=\"index.php?sub=$curDir\">$curDir</a></li>";
+                    echo "<li class=\"breadcrumb-item\"><a href=\"index.php?sub=$path\">$curDir</a></li>";
                 }
                 $currentItem++;
             }
@@ -114,7 +121,8 @@ echo "<div class=\"list-group\">";
                             echo "<span class=\"badge badge-primary my-2 my-lg-0\">$count item(s)</span>";
                         } else {
                             $fileicon = generateFaIcon($subdir . $file);
-                            echo "<a href=\"download.php?file=$subdir$file\" class=\"list-group-item d-flex justify-content-between align-items-center list-group-item-action\"><div><i class='fas $fileicon fa-fw'></i> $file</div>";
+                            echo "<a href=\"download.php?file=$subdir$file\" class=\"list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-file\"><div><i class='fas $fileicon fa-fw'></i> $file</div>";
+
                             echo "<span class=\"badge badge-secondary\">".round(filesize($dir . $file)/1024/1024,2)." MB</span>";
                         }
 
