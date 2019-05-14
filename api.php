@@ -127,6 +127,7 @@
             case "newFolder": newFolder(); break;
             case "uploadFile": uploadFile(); break;
             case "deleteFile": deleteFile(); break;
+            case "shareFile": shareFile(); break;
 
             case "logoutNow": session_destroy(); break;
 
