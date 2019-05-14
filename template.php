@@ -4,9 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
-    <title>Jumbotron Template · Bootstrap</title>
+    <meta name="author" content="aryx">
+    <title>miniCloud</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -32,8 +31,13 @@
         </ul>
 
         <ul class="navbar-nav my-2 my-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="index.php?page=user"><i class="fas fa-user"></i> aryx</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> aryx</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#"><i class="fas fa-wrench fa-fw"></i> Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?page=logout"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
+                </div>
             </li>
         </ul>
 
