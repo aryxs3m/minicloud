@@ -7,9 +7,13 @@
  */
 
 
-require "config.inc.php";
-require "system.inc.php";
+    require "config.inc.php";
+    require "system.inc.php";
 
-require_once "template.php";
+    session_start();
+
+    checkLogin();
+
+    require_once "template.php";
 
 ?>

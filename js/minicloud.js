@@ -13,9 +13,84 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
-
+var selectedFile;
 
 $(document).ready(function(){
+
+    // file context menu
+    $('.list-group-file').on('contextmenu', function(e) {
+        var top = e.pageY - 10;
+        var left = e.pageX - 90;
+        $("#context-menu").css({
+            display: "block",
+            top: top,
+            left: left
+        }).addClass("show");
+
+        selectedFile = $(this).find(".filename").html();
+
+        return false; //blocks default Webbrowser right click menu
+    }).on("click", function() {
+        $("#context-menu").removeClass("show").hide();
+    });
+
+    $("#context-menu a").on("click", function() {
+        $(this).parent().removeClass("show").hide();
+    });
+
+    $("body").click(function(){
+        $("#context-menu").removeClass("show").hide();
+    });
+
+
+    $("a#contextMenuDeleteFile").click(function(event){
+
+        event.preventDefault();
+
+        var path = getUrlParameter("sub");
+        if (path == undefined) {
+            path = "";
+        }
+
+        $.ajax({
+            url: 'api.php', // point to server-side controller method
+            data: {
+                request : "deleteFile",
+                path : path,
+                file : selectedFile
+            },
+            type: 'post',
+
+            success: function(response) {
+                window.location = window.location;
+            },
+            error: function (response) {
+                alert("Error while trying to delete!");
+            }
+        });
+
+    });
+
+
+    $("#menu-logout").click(function(event){
+        event.preventDefault();
+
+        $.ajax({
+            url: 'api.php', // point to server-side controller method
+            data: {
+                request : "logoutNow"
+            },
+            type: 'post',
+
+            success: function(response) {
+                window.location = "index.php";
+            },
+            error: function (response) {
+                alert("Error while trying to log out!");
+            }
+        });
+    });
+
 
     $("#btn-upload-file").click(function(){
 

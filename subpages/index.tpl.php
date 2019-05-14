@@ -85,13 +85,11 @@ $blockedThings = array(
 
 echo "<div class=\"list-group\">";
 
-    $user = "aryx"; // TODO: debug only, add user login stuff
-
     if (!isset($subdir)) {
-        $dir = home_directory_root . $user . "/";
+        $dir = home_directory_root . $_SESSION['user_name'] . "/";
         $subdir = "";
     } else {
-        $dir = home_directory_root . $user . "/{$subdir}/";
+        $dir = home_directory_root . $_SESSION['user_name'] . "/{$subdir}/";
         $subdir .= "/";
     }
 
@@ -121,7 +119,7 @@ echo "<div class=\"list-group\">";
                             echo "<span class=\"badge badge-primary my-2 my-lg-0\">$count item(s)</span>";
                         } else {
                             $fileicon = generateFaIcon($subdir . $file);
-                            echo "<a href=\"download.php?file=$subdir$file\" class=\"list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-file\"><div><i class='fas $fileicon fa-fw'></i> $file</div>";
+                            echo "<a href=\"download.php?file=$subdir$file\" class=\"list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-file\"><div><i class='fas $fileicon fa-fw'></i> <span class='filename'>$file</span></div>";
 
                             echo "<span class=\"badge badge-secondary\">".round(filesize($dir . $file)/1024/1024,2)." MB</span>";
                         }
@@ -141,6 +139,10 @@ echo "</div>";
 
 ?>
 
+<div class="dropdown-menu dropdown-menu-sm" id="context-menu">
+    <a class="dropdown-item" href="#" id="contextMenuDeleteFile"><i class="fas fa-trash fa-fw"></i> Delete</a>
+    <a class="dropdown-item" href="#" id="contextMenuShareFile"><i class="fas fa-share fa-fw"></i> Share</a>
+</div>
 
 
 <div class="modal fade" id="fileUploadModal" tabindex="-1" role="dialog" aria-labelledby="fileUploadModalLabel" aria-hidden="true">

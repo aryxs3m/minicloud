@@ -6,10 +6,12 @@
  * Time: 18:32
  */
 
-
-
-
     include_once "config.inc.php";
+    include_once "system.inc.php";
+
+    session_start();
+
+    checkLogin();
 
     function newFolder() {
         if (!isset($_POST['path'], $_POST['folderName'])) {
@@ -17,7 +19,7 @@
             exit;
         }
 
-        $user = "aryx"; //TODO !!
+        $user = $_SESSION['user_name'];
 
         if (mkdir(home_directory_root . "{$user}/{$_POST['path']}/{$_POST['folderName']}")) {
             echo "ok";
@@ -27,14 +29,13 @@
         }
     }
 
-
     function uploadFile() {
         if (!isset($_POST['path'])) {
             http_response_code(400);
             exit;
         }
 
-        $user = "aryx"; //TODO !!
+        $user = $_SESSION['user_name'];
 
         if (trim($_POST['path']) == "") {
             $target_dir = home_directory_root . "{$user}/";
@@ -71,12 +72,15 @@
     }
 
 
-    function removeFile() {
-        if (!isset($_POST['path'], $_POST['filename'])) {
+    function deleteFile() {
+        if (!isset($_POST['path'], $_POST['file'])) {
             http_response_code(400);
             exit;
         }
-        if (touch(home_directory_root . "{$user}/{$_POST['path']}/{$_POST['filename']}")) {
+
+        $user = $_SESSION["user_name"];
+
+        if (unlink(home_directory_root . "{$user}/{$_POST['path']}/{$_POST['file']}")) {
             echo "ok";
         } else {
             http_response_code(500);
@@ -92,7 +96,9 @@
         switch ($_POST['request']) {
             case "newFolder": newFolder(); break;
             case "uploadFile": uploadFile(); break;
-            case "removeFile": removeFile(); break;
+            case "deleteFile": deleteFile(); break;
+
+            case "logoutNow": session_destroy(); break;
 
             default: http_response_code(400); exit;
         }

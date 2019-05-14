@@ -9,8 +9,11 @@
 require_once "config.inc.php";
 require_once "system.inc.php";
 
+session_start();
 
-$user = "aryx"; // TODO: remove and add some auth stuff
+checkLogin();
+
+$user = $_SESSION['user_name'];
 
 if (!isset($_GET['file'])) {
     http_response_code(400);

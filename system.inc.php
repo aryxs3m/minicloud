@@ -6,8 +6,43 @@
  * Time: 16:43
  */
 
+function checkLogin() {
+    if (!isset($_SESSION['user_id'], $_SESSION['user_name'])) {
+        include_once "subpages/login.tpl.php";
+        exit;
+    }
+}
+
+function connectDB() {
+    $conn = new mysqli(mysql_server, mysql_user, mysql_password, mysql_database);
+    $conn->query("SET NAMES UTF8");
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    return $conn;
+}
+
+function createAdmin($username, $password) {
+
+    $conn = connectDB();
+
+    $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?,?)");
+
+    $stmt->bind_param("ss", $username, $password);
+
+    $password = password_hash($password, PASSWORD_BCRYPT);
+    $stmt->execute();
+
+    $stmt->close();
+    $conn->close();
+
+}
+
+
 function frontController(&$page) {
     if (isset($page)) {
+
         if (file_exists("subpages/{$page}.tpl.php")) {
             include_once "subpages/{$page}.tpl.php";
         } else {
@@ -21,7 +56,7 @@ function frontController(&$page) {
 
 function generateFaIcon($filePath) {
 
-    $user = "aryx"; //TODO: you know...
+    $user = $_SESSION['user_name'];
 
 
     $mime = mime_content_type(home_directory_root . "{$user}//" . $filePath);

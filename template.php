@@ -32,11 +32,11 @@
 
         <ul class="navbar-nav my-2 my-lg-0">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> aryx</a>
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> <?= $_SESSION['user_name'] ?></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#"><i class="fas fa-wrench fa-fw"></i> Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.php?page=logout"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
+                    <a class="dropdown-item" href="index.php?page=logout" id="menu-logout"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
                 </div>
             </li>
         </ul>
