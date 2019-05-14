@@ -7,6 +7,8 @@
  */
 
 
+define("minicloud_url", "http://localhost/minicloud");
+
 define("home_directory_root", "/var/www/html/minicloud_data/");
 
 

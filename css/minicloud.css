@@ -35,7 +35,9 @@ nav ol.breadcrumb {
     border-radius:0px;
 }
 
-
+.list-group-link a {
+    text-decoration:none;
+}
 
 .btn-primary {
     background-color:#352961;

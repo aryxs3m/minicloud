@@ -71,6 +71,45 @@ $(document).ready(function(){
 
     });
 
+    $("a#contextMenuShareFile").click(function(event){
+
+        event.preventDefault();
+
+        var path = getUrlParameter("sub");
+        if (path == undefined) {
+            path = "";
+        }
+
+        $.ajax({
+            url: 'api.php', // point to server-side controller method
+            data: {
+                request : "shareFile",
+                path : path,
+                file : selectedFile
+            },
+            type: 'post',
+
+            success: function(response) {
+
+                const el = document.createElement('textarea');
+                el.value = response;
+                el.setAttribute('readonly', '');
+                el.style.position = 'absolute';
+                el.style.left = '-9999px';
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+
+                alert("Link copied to your clipboard! ");
+            },
+            error: function (response) {
+                alert("Error while trying to share file!");
+            }
+        });
+
+    });
+
 
     $("#menu-logout").click(function(event){
         event.preventDefault();

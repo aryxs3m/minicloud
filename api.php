@@ -89,6 +89,36 @@
     }
 
 
+
+    function shareFile() {
+        if (!isset($_POST['path'], $_POST['file'])) {
+            http_response_code(400);
+            exit;
+        }
+
+        $userid = $_SESSION["user_id"];
+        $filepath = "{$_POST['path']}/{$_POST['file']}";
+        $code = bin2hex(openssl_random_pseudo_bytes(16));
+
+        $conn = connectDB();
+
+        $stmt = $conn->prepare("INSERT INTO shares (user_id, filepath, share_code) VALUES (?,?,?)");
+        $stmt->bind_param("iss", $userid, $filepath, $code);
+        $stmt->execute();
+
+        if (!empty($stmt->error)) {
+            http_response_code(500);
+            exit;
+        }
+
+        $stmt->close();
+        $conn->close();
+
+        echo minicloud_url . "/share.php?code=$code";
+    }
+
+
+
     if (!isset($_POST['request'])) {
         http_response_code(400);
         exit;
